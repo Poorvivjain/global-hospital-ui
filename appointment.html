@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Appointments - Global Hospital</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="form-card">
+    <h2>Book Appointment</h2>
+    <input type="text" id="patientName" placeholder="Patient Name" />
+    <label for="doctorSelect">Select Doctor:</label>
+    <select id="doctorSelect">
+      <option disabled selected>Select Doctor</option>
+    </select>
+    <input type="date" id="appointmentDate" />
+    <button onclick="addAppointment()">Book</button>
+    <ul id="appointmentList"></ul>
+  </div>
+
+  <script>
+    function loadDoctors() {
+      const select = document.getElementById("doctorSelect");
+      const doctors = JSON.parse(localStorage.getItem("doctors")) || [];
+      doctors.forEach(doc => {
+        const option = document.createElement("option");
+        option.value = doc.name;
+        option.textContent = doc.name;
+        select.appendChild(option);
+      });
+    }
+
+    function addAppointment() {
+      const patient = document.getElementById("patientName").value;
+      const doctor = document.getElementById("doctorSelect").value;
+      const date = new Date(document.getElementById("appointmentDate").value);
+      if (date <= new Date()) {
+        alert("Please choose a future date.");
+        return;
+      }
+      const li = document.createElement("li");
+      li.textContent = `${patient} - ${doctor} - ${date.toDateString()}`;
+      document.getElementById("appointmentList").appendChild(li);
+    }
+
+    window.onload = loadDoctors;
+  </script>
+</body>
+</html>

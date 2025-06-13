@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Doctors - Global Hospital</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="form-card">
+    <h2>Add Doctor</h2>
+    <input type="text" id="doctorName" placeholder="Doctor Name" />
+    <input type="text" id="specialization" placeholder="Specialization" />
+    <input type="text" id="timing" placeholder="Available Time" />
+    <button onclick="addDoctor()">Add Doctor</button>
+    <ul id="doctorList"></ul>
+    <a href="appointment.html">Go to Appointments</a>
+  </div>
+
+  <script>
+    function addDoctor() {
+      const name = document.getElementById("doctorName").value;
+      const spec = document.getElementById("specialization").value;
+      const time = document.getElementById("timing").value;
+      const doctor = { name, spec, time };
+      let doctors = JSON.parse(localStorage.getItem("doctors")) || [];
+      doctors.push(doctor);
+      localStorage.setItem("doctors", JSON.stringify(doctors));
+      const li = document.createElement("li");
+      li.textContent = `${name} - ${spec} (${time})`;
+      document.getElementById("doctorList").appendChild(li);
+    }
+
+    window.onload = () => {
+      const doctors = JSON.parse(localStorage.getItem("doctors")) || [];
+      for (const doc of doctors) {
+        const li = document.createElement("li");
+        li.textContent = `${doc.name} - ${doc.spec} (${doc.time})`;
+        document.getElementById("doctorList").appendChild(li);
+      }
+    };
+  </script>
+</body>
+</html>
