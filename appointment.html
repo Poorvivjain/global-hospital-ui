@@ -4,8 +4,27 @@
   <meta charset="UTF-8" />
   <title>Appointments - Global Hospital</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .back-button {
+      display: inline-block;
+      margin: 20px;
+      padding: 8px 16px;
+      background-color: #b19cd9;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .back-button:hover {
+      background-color: #9a81c2;
+    }
+  </style>
 </head>
 <body>
+
+  <!-- Back to Home Button -->
+  <a href="index.html" class="back-button">← Back to Home</a>
+
   <div class="form-card">
     <h2>Book Appointment</h2>
     <input type="text" id="patientName" placeholder="Patient Name" />
